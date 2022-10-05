@@ -1,2 +1,2 @@
-# PT_Demo_NodeJsApiWithLes
-PT_Demo_NodeJsApiWithLes is a simple Node.js Web API using 'express' and 'sqlite' libraries.
+# PT_Demo_NodeJsWebApiWithLes
+PT_Demo_NodeJsWebApiWithLes is a simple Node.js Web API using 'express' and 'sqlite' libraries.
