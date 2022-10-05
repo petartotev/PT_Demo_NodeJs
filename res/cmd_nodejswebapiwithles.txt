@@ -1,0 +1,159 @@
+====================================================================================================
+Node.Js API Server
+====================================================================================================
+
+nvm --version
+
+node --version
+
+npm --version
+
+npm init
+
+# give name => node-api
+# set version
+# set description
+# set entry point (index.js)
+# set test command: default
+# git repository: default
+# keywords: default
+# author: default
+# license: (ISC)
+# is OK? (yes)
+
+=> package.json file created.
+
+# Go to folder where package.json is and:
+
+npm install sqlite3 # database 
+npm install express # library that runs inside node runtime, widely used, allows us to build HTTP-based apps in a particular way
+
+# Check newly created node_modules and package-lock.json after installation.
+
+# Create new file => index.js
+
+|	const express = require('express');	
+|	const app = express();
+|	
+|	app.get('/api/todos', (req, res) => {
+|		res.status(200).json('message');
+|	});
+|	
+|	app.listen(4000, () => {
+|		console.log('Server running on port 4000!');
+|	});
+	
+node index.js # runs app
+
+# Create new file => database.js
+
+|	const sqlite3 = require('sqlite3').verbose(); # use verbose() for more meaningful error messages
+|	
+|	let db = new sqlite3.Database('todo.db', (err) => {
+|		if (err) {
+|			console.error(err.message);
+|			throw err;
+|		} else {
+|			console.log('Connect to db...');
+|			db.run(`CREATE TABLE todos (
+|				id INTEGER PRIMARY KEY AUTOINCREMENT,
+|				name TEXT)`,
+|				(err) => {
+|					if (err) {
+|						console.log('Table already exists...');
+|					}
+|				});
+|		}
+|	});
+|	
+|	module.exports = db;
+
+# Update index.js
+
+# Install nodemon - restarts app on file changes
+
+npm install nodemon --global
+
+# Install body-parser
+
+npm install body-parser
+
+nodemon index.js
+
+# Add this line in scripts of package.json
+
+|	"scripts": {
+|		"test": "echo \"Error: no test specified\" && exit 1",
+|		"start": "nodemon index.js"
+|	},
+
+npm start # same as command "nodemon index.js"
+
+# Throws exception!
+# nodemon : File C:\Program Files\nodejs\nodemon.ps1 cannot be loaded because running scripts is disabled on this system.
+
+# Open Power Shell as admin and:
+
+PS C:\Windows\system32> Set-ExecutionPolicy RemoteSigned -Scope CurrentUser
+
+# Update index.js to include post request and to make use of body-parser library
+
+|	const express = require('express');
+|	const db = require('./database');
+|	const bodyParser = require('body-parser');
+|	
+|	const app = express();
+|	
+|	app.use(bodyParser.urlencoded({ extended: false }));
+|	app.use(bodyParser.json());
+|	
+|	app.get('/api/todos', (req, res) => {
+|		var sql = `select * from todos;`;
+|		var params = [];
+|	
+|		db.all(sql, params, (err, rows) => {
+|			if (err) {
+|				res.status(400).json({
+|					"error": err.message
+|				});
+|			} else {
+|				res.status(200).json(rows);
+|			}
+|		})
+|	});
+|	
+|	app.post('/api/todos', (req, res) => {
+|		var errors = [];
+|		if (!req.body.name) {
+|			errors.push('Error! No name supplied!');
+|		}
+|		if (errors.length) {
+|			res.status(400).json({
+|				"error": errors.join(',')
+|			});
+|			return;
+|		}
+|		var data = {
+|			name: req.body.name
+|		}
+|	
+|		var sql = `insert into todos (name) values (?);`;
+|		var params = [data.name];
+|	
+|		db.run(sql, params, function (err, result) {
+|			if (err) {
+|				res.status(400).json({
+|					"error": err.message
+|				});
+|			} else {
+|				res.status(201).json({
+|					id: this.lastID,
+|					name: data.name
+|				});
+|			}
+|		});
+|	});
+|	
+|	app.listen(4000, () => {
+|		console.log('Server running on port 4000!');
+|	});
