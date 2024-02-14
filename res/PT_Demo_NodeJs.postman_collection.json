@@ -1,7 +1,7 @@
 {
 	"info": {
 		"_postman_id": "b3ba9f54-17fb-47a4-86f5-a1ce7605cb2e",
-		"name": "PT_Demo_NodeJsWebApiWithLes",
+		"name": "PT_Demo_NodeJs",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "23140527"
 	},
@@ -23,6 +23,58 @@
 				}
 			},
 			"response": [
+				{
+					"name": "200 OK Simple response",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url-nodejswebapiwithles}}/api/todos",
+							"host": [
+								"{{url-nodejswebapiwithles}}"
+							],
+							"path": [
+								"api",
+								"todos"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "9"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"9-OfJAV70ntGDw5QlnwX6DRQyiWfk\""
+						},
+						{
+							"key": "Date",
+							"value": "Tue, 13 Feb 2024 16:50:48 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "\"message\""
+				},
 				{
 					"name": "200",
 					"originalRequest": {
