@@ -1,11 +1,12 @@
 # PT_Demo_NodeJs
 
-PT_Demo_NodeJsWebApiWithLes is a simple Node.js Web API using 'express' and 'sqlite' libraries.
+PT_Demo_NodeJs is a simple Node.js Web API using `express` and `sqlite` libraries.
 <br>It was inspired by the Les Jackson's YouTube video [3 Frameworks / 3 APIs - Step by Step Builds](https://www.youtube.com/watch?v=Zo70w5ds0-w).
 
 ## Contents
 - [Prerequisites](#prerequisites)
 - [Setup](#setup)
+- [Implementation using SQLite, Nodemon and Body-Parser](#implementation-using-sqlite-nodemon-and-body-parser)
 - [Links](#links)
 
 ## Prerequisites
@@ -155,7 +156,7 @@ In `src`, new `node_modules` directory and `package-lock.json` file should have 
 const express = require('express');
 const app = express();
 
-app.get('/api/todos', (req, res) => {
+app.get('/api/notes', (req, res) => {
     res.status(200).json('message');
 });
 
@@ -170,9 +171,163 @@ app.listen(4000, () => {
 node index.js
 ```
 
-5. Test the application by accessing the server on `http://localhost:4000/api/todos`
+5. Test by calling `http://localhost:4000/api/notes`
 
-![img](./res/api-todos-endpoint.jpg)
+![img](./res/api-notes-endpoint-1.jpg)
+
+## Implementation using SQLite, Nodemon and Body-Parser
+
+1. In `src` directory (where `package.json` is), install `SQLite`:
+
+```
+npm install sqlite3
+    npm WARN deprecated @npmcli/move-file@1.1.2: This functionality has been moved to   @npmcli/fs
+    added 123 packages, and audited 124 packages in 10s
+    12 packages are looking for funding
+      run `npm fund` for details
+    found 0 vulnerabilities
+```
+
+2. Create new `database.js` file in `src` directory:
+
+```
+const sqllite = require('sqlite3').verbose();
+
+let db = new sqllite.Database('note.db', (err) => {
+    if (err) {
+        console.error(err.message);
+        throw err;
+    }
+    else {
+        console.log('Connected to db...');
+        db.run(`CREATE TABLE notes (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            content TEXT,
+            createdAt DATETIME)`,
+            (err) => {
+                if (err) {
+                    console.log('Table already created!');
+                }
+            });
+    }
+});
+
+module.exports = db;
+```
+
+3. Refactor the `GET` endpoint in `ìndex.js`:
+
+```
+const express = require('express');
+const db = require('./database');
+
+const app = express();
+
+app.get('/api/notes', (req, res) => {
+    var sql = 'SELECT * FROM notes;';
+    var params = [];
+
+    db.all(sql, params, (err, rows) => {
+        if (err) {
+            res.status(400).json({ "error": err.message });
+        } else {
+            res.status(200).json(rows);
+        }
+    });
+});
+
+app.listen(4000, () => {
+    console.log('Server running on port 4000')
+});
+```
+
+4. Test by calling `http://localhost:4000/api/notes`
+
+![img](./res/api-notes-endpoint-2.jpg)
+
+5. Install `nodemon` and `body-parser`:
+
+```
+npm install nodemon --global
+npm install body-parser
+```
+
+6. Next, start the application by using `nodemon`:
+```
+nodemon index.js
+    [nodemon] 3.0.3
+    [nodemon] to restart at any time, enter `rs`
+    [nodemon] watching path(s): *.*
+    [nodemon] watching extensions: js,mjs,cjs,json
+    [nodemon] starting `node index.js`
+    Server running on port 4000
+    Connected to db...
+    Table already created!
+```
+
+💡 You can also add the command as `start` script in `package.json`:
+
+```
+{
+  ...
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon index.js"
+  },
+  ...
+}
+
+```
+
+7. Add `POST` endpoint in `index.js` using `body-parser`:
+
+```
+const express = require('express');
+const db = require('./database');
+const bodyParser = require('body-parser');
+
+const app = express();
+
+app.use(bodyParser.urlencoded({extended: false}));
+app.use(bodyParser.json());
+
+app.get('/api/notes', (req, res) => {
+    ...
+});
+
+app.post('/api/notes', (req, res) => {
+    var errors = [];
+    if (!req.body.content) {
+        errors.push('No content is supplied!')
+    }
+    if (errors.length) {
+        res.status(400).json({ 'error': errors.join(', ')});
+        return;
+    }
+
+    var data = {
+        content: req.body.content
+    }
+    var sql = 'INSERT INTO notes (content, createdAt) VALUES (?,?);';
+    var params = [data.content, Date.now()];
+
+    db.run(sql, params, function(err, result) {
+        if (err) {
+            res.status(400).json({ 'error': err.message });
+        }
+        res.status(201).json({
+            id: this.lastID,
+            content: data.content
+        })
+    });
+});
+
+app.listen(4000, () => {
+    console.log('Server running on port 4000')
+});
+```
+
+8. Test by calling the `POST` endpoint and then getting all notes using the `GET` endpoint.
 
 ## Links
 - https://www.youtube.com/watch?v=Zo70w5ds0-w - Les Jackson's 3 Frameworks YouTube video
