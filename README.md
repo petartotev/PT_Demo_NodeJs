@@ -1,7 +1,7 @@
 # PT_Demo_NodeJs
 
 PT_Demo_NodeJs is a simple Node.js Web API using `express` and `sqlite` libraries.
-<br>It was inspired by the Les Jackson's YouTube video [3 Frameworks / 3 APIs - Step by Step Builds](https://www.youtube.com/watch?v=Zo70w5ds0-w).
+<br>It was inspired by Les Jackson's YouTube video [3 Frameworks / 3 APIs - Step by Step Builds](https://www.youtube.com/watch?v=Zo70w5ds0-w).
 
 ## Contents
 - [Prerequisites](#prerequisites)
@@ -327,7 +327,13 @@ app.listen(4000, () => {
 });
 ```
 
-8. Test by calling the `POST` endpoint and then getting all notes using the `GET` endpoint.
+8. Implement `GET by Id`, `DELETE`, `PUT`, `PATCH` endpoints.
+
+Check the latest version of `index.js` to see the finalized set of CRUD operations.
+
+9. Test by calling the endpoints using Postman (see collection in `src` directory).
+
+![img](./res/api-notes-endpoint-3.jpg)
 
 ## Links
 - https://www.youtube.com/watch?v=Zo70w5ds0-w - Les Jackson's 3 Frameworks YouTube video
