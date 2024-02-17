@@ -7,6 +7,17 @@ const app = express();
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
 
+function validateHeader(req, res, next) {
+    const myHeaderValue = req.headers['x-auth-token'];
+    console.log(myHeaderValue);
+    if (myHeaderValue !== 'ThisIsASuperSecretToken123') {
+        console.log('wrong');
+        return res.status(403).json({ "error": "Not Allowed" });
+    }
+    console.log('correct');
+    next();
+}
+
 app.get('/api/notes', (req, res) => {
     var sql = 'SELECT * FROM notes;';
     var params = [];
@@ -32,7 +43,7 @@ app.get('/api/notes/:id', (req, res) => {
     });
 });
 
-app.post('/api/notes', (req, res) => {
+app.post('/api/notes', validateHeader, (req, res) => {
     var errors = [];
     if (!req.body.content) {
         errors.push('No content is supplied!')
@@ -59,7 +70,7 @@ app.post('/api/notes', (req, res) => {
     });
 });
 
-app.put('/api/notes/:id', (req, res) => {
+app.put('/api/notes/:id', validateHeader, (req, res) => {
     const { content } = req.body;
     if (!content) {
         res.status(400).json({ 'error': 'Content is required' });
@@ -86,7 +97,7 @@ app.put('/api/notes/:id', (req, res) => {
     });
 });
 
-app.patch('/api/notes/:id', (req, res) => {
+app.patch('/api/notes/:id', validateHeader, (req, res) => {
     var data = {
         content: req.body.content,
         createdAt: Date.now() // Optionally update the createdAt or add another field for updatedAt
@@ -106,7 +117,7 @@ app.patch('/api/notes/:id', (req, res) => {
     });
 });
 
-app.delete('/api/notes/:id', (req, res) => {
+app.delete('/api/notes/:id', validateHeader, (req, res) => {
     db.run(
         'DELETE FROM notes WHERE id = ?',
         req.params.id,

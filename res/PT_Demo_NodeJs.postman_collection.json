@@ -307,10 +307,16 @@
 			"name": "POST Note",
 			"request": {
 				"method": "POST",
-				"header": [],
+				"header": [
+					{
+						"key": "X-Auth-Token",
+						"value": "ThisIsASuperSecretToken123",
+						"type": "text"
+					}
+				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"content\": \"Sing a song\"\r\n}",
+					"raw": "{\r\n    \"content\": \"Prepare a delicious dish...\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -450,6 +456,140 @@
 					],
 					"cookie": [],
 					"body": "{\n    \"id\": 2,\n    \"content\": \"Wash the car\"\n}"
+				},
+				{
+					"name": "210 Created Header",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "X-Access-Secret",
+								"value": "abc123",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"content\": \"Prepare a delicious dish...\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url-http-demo-nodejs}}/api/notes",
+							"host": [
+								"{{url-http-demo-nodejs}}"
+							],
+							"path": [
+								"api",
+								"notes"
+							]
+						}
+					},
+					"status": "Created",
+					"code": 201,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "49"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"31-ffEa0TAwVhD+Lze83zVYaME28Mc\""
+						},
+						{
+							"key": "Date",
+							"value": "Sat, 17 Feb 2024 05:49:22 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"id\": 10,\n    \"content\": \"Prepare a delicious dish...\"\n}"
+				},
+				{
+					"name": "403 Forbidden Header",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "X-Access-Secret",
+								"value": "ThisIsASuperSecretSecret1234",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"content\": \"Prepare a delicious dish...\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url-http-demo-nodejs}}/api/notes",
+							"host": [
+								"{{url-http-demo-nodejs}}"
+							],
+							"path": [
+								"api",
+								"notes"
+							]
+						}
+					},
+					"status": "Forbidden",
+					"code": 403,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "23"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"17-M3wGB1h5YTZbiaG96/ml2UQNzM8\""
+						},
+						{
+							"key": "Date",
+							"value": "Sat, 17 Feb 2024 05:45:23 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"error\": \"Not Allowed\"\n}"
 				}
 			]
 		},
@@ -457,10 +597,16 @@
 			"name": "PUT Note",
 			"request": {
 				"method": "PUT",
-				"header": [],
+				"header": [
+					{
+						"key": "X-Auth-Token",
+						"value": "ThisIsASuperSecretToken123",
+						"type": "text"
+					}
+				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"content\": \"Sing a very beautiful song!\"\r\n}",
+					"raw": "{\r\n    \"content\": \"Prepare a delicious dish!!!\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -468,14 +614,14 @@
 					}
 				},
 				"url": {
-					"raw": "{{url-http-demo-nodejs}}/api/notes/55",
+					"raw": "{{url-http-demo-nodejs}}/api/notes/12",
 					"host": [
 						"{{url-http-demo-nodejs}}"
 					],
 					"path": [
 						"api",
 						"notes",
-						"55"
+						"12"
 					]
 				}
 			},
@@ -541,6 +687,74 @@
 					],
 					"cookie": [],
 					"body": "{\n    \"message\": \"Note updated successfully\",\n    \"id\": \"5\",\n    \"content\": \"Sing a very beautiful song!\"\n}"
+				},
+				{
+					"name": "200 OK Header",
+					"originalRequest": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "ThisIsASuperSecretToken123",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"content\": \"Prepare a delicious dish!!!\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url-http-demo-nodejs}}/api/notes/12",
+							"host": [
+								"{{url-http-demo-nodejs}}"
+							],
+							"path": [
+								"api",
+								"notes",
+								"12"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "89"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"59-Z/OjCpMlcqkda1EUwMF/hspjKnI\""
+						},
+						{
+							"key": "Date",
+							"value": "Sat, 17 Feb 2024 05:52:51 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"message\": \"Note updated successfully\",\n    \"id\": \"12\",\n    \"content\": \"Prepare a delicious dish!!!\"\n}"
 				},
 				{
 					"name": "404 Not Found",
@@ -610,10 +824,16 @@
 			"name": "PATCH Note",
 			"request": {
 				"method": "PATCH",
-				"header": [],
+				"header": [
+					{
+						"key": "X-Auth-Token",
+						"value": "ThisIsASuperSecretToken123",
+						"type": "text"
+					}
+				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"content\": \"Sing a BEAUTIFUL song!\"\r\n}",
+					"raw": "{\r\n    \"content\": \"Prepare a delicious dish!!!!!!\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -621,14 +841,14 @@
 					}
 				},
 				"url": {
-					"raw": "{{url-http-demo-nodejs}}/api/notes/5",
+					"raw": "{{url-http-demo-nodejs}}/api/notes/12",
 					"host": [
 						"{{url-http-demo-nodejs}}"
 					],
 					"path": [
 						"api",
 						"notes",
-						"5"
+						"12"
 					]
 				}
 			},
@@ -756,6 +976,74 @@
 					],
 					"cookie": [],
 					"body": "{\n    \"message\": \"success\",\n    \"data\": {\n        \"content\": \"Sing a BEAUTIFUL song!\",\n        \"createdAt\": 1707973845263\n    },\n    \"changes\": 0\n}"
+				},
+				{
+					"name": "200 OK Header",
+					"originalRequest": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "ThisIsASuperSecretToken123",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"content\": \"Prepare a delicious dish!!!!!!\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url-http-demo-nodejs}}/api/notes/12",
+							"host": [
+								"{{url-http-demo-nodejs}}"
+							],
+							"path": [
+								"api",
+								"notes",
+								"12"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "111"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"6f-W//N60JEddsvdW3XcszWcqBCh94\""
+						},
+						{
+							"key": "Date",
+							"value": "Sat, 17 Feb 2024 05:53:57 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"message\": \"success\",\n    \"data\": {\n        \"content\": \"Prepare a delicious dish!!!!!!\",\n        \"createdAt\": 1708149237422\n    },\n    \"changes\": 1\n}"
 				}
 			]
 		},
@@ -763,7 +1051,13 @@
 			"name": "DELETE Note",
 			"request": {
 				"method": "DELETE",
-				"header": [],
+				"header": [
+					{
+						"key": "X-Auth-Token",
+						"value": "ThisIsASuperSecretToken123",
+						"type": "text"
+					}
+				],
 				"url": {
 					"raw": "{{url-http-demo-nodejs}}/api/notes/4",
 					"host": [
@@ -882,6 +1176,65 @@
 					],
 					"cookie": [],
 					"body": "{\n    \"message\": \"deleted\",\n    \"changes\": 0\n}"
+				},
+				{
+					"name": "200 OK Header",
+					"originalRequest": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "ThisIsASuperSecretToken123",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{url-http-demo-nodejs}}/api/notes/12",
+							"host": [
+								"{{url-http-demo-nodejs}}"
+							],
+							"path": [
+								"api",
+								"notes",
+								"12"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "33"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"21-k2zl4Fq8LUUyFctrrIZoB6jlNZ4\""
+						},
+						{
+							"key": "Date",
+							"value": "Sat, 17 Feb 2024 05:54:47 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"message\": \"deleted\",\n    \"changes\": 1\n}"
 				}
 			]
 		}
