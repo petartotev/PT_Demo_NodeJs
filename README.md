@@ -7,6 +7,7 @@ PT_Demo_NodeJs is a simple Node.js Web API using `express` and `sqlite` librarie
 - [Prerequisites](#prerequisites)
 - [Setup](#setup)
 - [Implementation using SQLite, Nodemon and Body-Parser](#implementation-using-sqlite-nodemon-and-body-parser)
+- [Access Header](#access-header)
 - [Links](#links)
 
 ## Prerequisites
@@ -334,6 +335,39 @@ Check the latest version of `index.js` to see the finalized set of CRUD operatio
 9. Test by calling the endpoints using Postman (see collection in `src` directory).
 
 ![img](./res/api-notes-endpoint-3.jpg)
+
+## Access Header
+
+1. In `index.js`, introduce the following middleware function:
+
+```
+function validateHeader(req, res, next) {
+    const myHeaderValue = req.headers['x-auth-token'];
+    console.log(myHeaderValue);
+    if (myHeaderValue !== 'ThisIsASuperSecretToken123') {
+        console.log('wrong');
+        return res.status(403).json({ "error": "Not Allowed" });
+    }
+    console.log('correct');
+    next();
+}
+```
+
+⚠️ Note that `req.headers['x-auth-token']` should be lowercase in the codebase, but when you pass the header in your HTTP requests it is recommended for it to be PascalCase: `X-Auth-Token`.
+
+2. In all non-idempotent endpoints (POST, PUT?, PATCH, DELETE?), invoke the middleware:
+
+Before:
+```
+app.post('/api/notes', (req, res) => { ... });
+```
+
+After:
+```
+app.post('/api/notes', validateHeader, (req, res) => { ... });
+```
+
+3. Test the endpoints described above having `X-Auth-Token` header with the correct value.
 
 ## Links
 - https://www.youtube.com/watch?v=Zo70w5ds0-w - Les Jackson's 3 Frameworks YouTube video
