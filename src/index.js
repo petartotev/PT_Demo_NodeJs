@@ -1,6 +1,7 @@
 const express = require('express');
 const db = require('./database');
 const bodyParser = require('body-parser');
+const ACCESS_SECRET = process.env.ACCESS_SECRET || require('./secrets').ACCESS_SECRET;
 
 const app = express();
 
@@ -9,12 +10,9 @@ app.use(bodyParser.json());
 
 function validateHeader(req, res, next) {
     const myHeaderValue = req.headers['x-auth-token'];
-    console.log(myHeaderValue);
-    if (myHeaderValue !== 'ThisIsASuperSecretToken123') {
-        console.log('wrong');
+    if (myHeaderValue !== ACCESS_SECRET) {
         return res.status(403).json({ "error": "Not Allowed" });
     }
-    console.log('correct');
     next();
 }
 

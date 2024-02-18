@@ -338,17 +338,16 @@ Check the latest version of `index.js` to see the finalized set of CRUD operatio
 
 ## Access Header
 
+### Hardcoded Secret
+
 1. In `index.js`, introduce the following middleware function:
 
 ```
 function validateHeader(req, res, next) {
     const myHeaderValue = req.headers['x-auth-token'];
-    console.log(myHeaderValue);
     if (myHeaderValue !== 'ThisIsASuperSecretToken123') {
-        console.log('wrong');
         return res.status(403).json({ "error": "Not Allowed" });
     }
-    console.log('correct');
     next();
 }
 ```
@@ -368,6 +367,55 @@ app.post('/api/notes', validateHeader, (req, res) => { ... });
 ```
 
 3. Test the endpoints described above having `X-Auth-Token` header with the correct value.
+
+### Secret in secrets.js or as Environment Variable
+
+1. Create a new `secrets.js` file and ignore it in `.gitignore`:
+```
+secrets.js
+```
+
+2. Set `ACCESS_SECRET` const in the `secrets.js` file:
+```
+module.exports = {
+    ACCESS_SECRET: 'Secret123'
+};
+```
+
+3. On Windows, you can also set the `ACCESS_SECRET` as an environment variable in `cmd.exe`:
+```
+set ACCESS_SECRET=Secret123
+```
+Then, check its value in `cmd.exe`:
+```
+echo %ACCESS_SECRET%
+```
+
+On Linux, you can also set the `ACCESS_SECRET` as an environment variable in `Terminal`:
+```
+export ACCESS_SECRET=my-header-value-123
+```
+Then, check its value in `Terminal`:
+```
+echo $ACCESS_SECRET
+```
+
+4. Either read the `ACCESS_SECRET` value in `index.js` from the same session in the opened `cmd.exe` or from `secrets.js` if not found as env var - by declaring the following const and using it in validateHeader():
+
+```
+...
+const ACCESS_SECRET = process.env.ACCESS_SECRET || require('./secrets').ACCESS_SECRET;
+
+...
+
+function validateHeader(req, res, next) {
+    const myHeaderValue = req.headers['x-auth-token'];
+    if (myHeaderValue !== ACCESS_SECRET) {
+        return res.status(403).json({ "error": "Not Allowed" });
+    }
+    next();
+}
+```
 
 ## Links
 - https://www.youtube.com/watch?v=Zo70w5ds0-w - Les Jackson's 3 Frameworks YouTube video
