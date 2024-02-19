@@ -8,6 +8,9 @@ PT_Demo_NodeJs is a simple Node.js Web API using `express` and `sqlite` librarie
 - [Setup](#setup)
 - [Implementation using SQLite, Nodemon and Body-Parser](#implementation-using-sqlite-nodemon-and-body-parser)
 - [Access Header](#access-header)
+    - [Hardcoded Secret](#hardcoded-secret)
+    - [Secret as Env Var or in Secrets.js](#secret-as-env-var-or-in-secretsjs)
+    - [Secret as Env Var or in Secrets.json](#secret-as-env-var-or-in-secretsjson)
 - [Links](#links)
 
 ## Prerequisites
@@ -368,10 +371,11 @@ app.post('/api/notes', validateHeader, (req, res) => { ... });
 
 3. Test the endpoints described above having `X-Auth-Token` header with the correct value.
 
-### Secret in secrets.js or as Environment Variable
+### Secret as Env Var or in Secrets.js
 
 1. Create a new `secrets.js` file and ignore it in `.gitignore`:
 ```
+##### PT ADDED #####
 secrets.js
 ```
 
@@ -416,6 +420,32 @@ function validateHeader(req, res, next) {
     next();
 }
 ```
+
+### Secret as Env Var or in Secrets.json
+
+1. Do everything described in the section above.
+
+2. Create new `secrets.json` file and add it to `.gitignore`:
+```
+##### PT ADDED #####
+secrets.js
+secrets.json
+```
+
+3. Add your secret as JSON in `secrets.json`:
+```
+{
+    "ACCESS_SECRET": "your-secret-here"
+}
+```
+
+4. Refactor the ACCESS_SECRET retrieval in `index.js` to use `./secrets.json` instead of `./secrets(.js)`:
+```
+// const ACCESS_SECRET = process.env.ACCESS_SECRET || require('./secrets').ACCESS_SECRET;
+const ACCESS_SECRET = process.env.ACCESS_SECRET || require('./secrets.json').ACCESS_SECRET;
+```
+
+5. Test
 
 ## Links
 - https://www.youtube.com/watch?v=Zo70w5ds0-w - Les Jackson's 3 Frameworks YouTube video

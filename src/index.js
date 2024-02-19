@@ -1,7 +1,8 @@
 const express = require('express');
 const db = require('./database');
 const bodyParser = require('body-parser');
-const ACCESS_SECRET = process.env.ACCESS_SECRET || require('./secrets').ACCESS_SECRET;
+// const ACCESS_SECRET = process.env.ACCESS_SECRET || require('./secrets').ACCESS_SECRET;
+const ACCESS_SECRET = process.env.ACCESS_SECRET || require('./secrets.json').ACCESS_SECRET;
 
 const app = express();
 
