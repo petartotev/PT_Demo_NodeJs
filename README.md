@@ -3,6 +3,8 @@
 PT_Demo_NodeJs is a simple Node.js Web API using `express` and `sqlite` libraries.
 <br>It was inspired by Les Jackson's YouTube video [3 Frameworks / 3 APIs - Step by Step Builds](https://www.youtube.com/watch?v=Zo70w5ds0-w).
 
+![cover](./res/cover_tinify.png)
+
 ## Contents
 - [Prerequisites](#prerequisites)
 - [Setup](#setup)
@@ -11,6 +13,8 @@ PT_Demo_NodeJs is a simple Node.js Web API using `express` and `sqlite` librarie
     - [Hardcoded Secret](#hardcoded-secret)
     - [Secret as Env Var or in Secrets.js](#secret-as-env-var-or-in-secretsjs)
     - [Secret as Env Var or in Secrets.json](#secret-as-env-var-or-in-secretsjson)
+- [Backend Refactoring](#backend-refactoring)
+- [Frontend Implementation](#frontend-implementation)
 - [Links](#links)
 
 ## Prerequisites
@@ -446,6 +450,39 @@ const ACCESS_SECRET = process.env.ACCESS_SECRET || require('./secrets.json').ACC
 ```
 
 5. Test
+
+## Backend Refactoring
+
+1. All existing logic was moved to a new `note-app-server` directory.
+
+2. `Note` entity was expanded to contain:
+- Id
+- Content
+- Type
+    - unknown
+    - beer
+    - bills
+    - delivery
+    - family
+    - health
+    - hobby
+    - house
+    - travel
+    - work
+- Status
+    - TODO
+    - DOING
+    - ON_HOLD
+    - NOT_DOING
+    - DONE
+    - ARCHIVED
+- Deadline
+- CreatedAt
+- UpdatedAt
+
+3. PATCH endpoint was changed in order to update `Status`.
+
+## Frontend Implementation
 
 ## Links
 - https://www.youtube.com/watch?v=Zo70w5ds0-w - Les Jackson's 3 Frameworks YouTube video
