@@ -9,11 +9,12 @@ let db = new sqlite3.Database('note.db', (err) => {
     db.run(`CREATE TABLE IF NOT EXISTS notes (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
         content TEXT,
-        type TEXT CHECK(type IN ('unknown', 'beer', 'bills', 'delivery', 'family', 'health', 'hobby', 'house', 'travel', 'work')) NOT NULL,
+        type TEXT CHECK(type IN ('unknown', 'beer', 'bills', 'delivery', 'family', 'health', 'hobby', 'house', 'shop', 'travel', 'work')) NOT NULL,
         status TEXT CHECK(status IN ('todo', 'doing', 'on_hold', 'not_doing', 'done', 'archived')) NOT NULL DEFAULT 'TODO''',
         deadline DATETIME,
         createdAt DATETIME DEFAULT CURRENT_TIMESTAMP,
-        updatedAt DATETIME
+        updatedAt DATETIME,
+        isDeleted BOOLEAN DEFAULT 0
     )`, (err) => {
         if (err) {
             console.error('Error creating table', err.message);

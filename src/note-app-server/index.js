@@ -8,7 +8,7 @@ const ACCESS_SECRET = process.env.ACCESS_SECRET || require('./secrets.json').ACC
 const app = express();
 app.use(cors());
 
-const NoteType = ['unknown', 'beer', 'bills', 'delivery', 'family', 'health', 'hobby', 'house', 'travel', 'work'];
+const NoteType = ['unknown', 'beer', 'bills', 'delivery', 'family', 'health', 'hobby', 'house', 'shop', 'travel', 'work'];
 const NoteStatus = ['todo', 'doing', 'on_hold', 'not_doing', 'done', 'archived'];
 
 app.use(bodyParser.urlencoded({extended: false}));
@@ -31,7 +31,8 @@ function validateNoteTypeAndStatus(type, status) {
 app.get('/api/notes', validateHeader, (req, res) => {
     // Updated SQL query to order by deadline (NULLs last), then by createdAt DESC
     //         WHERE status != 'archived' 
-    var sql = `SELECT * FROM notes 
+    var sql = `SELECT * FROM notes
+               WHERE IsDeleted = 0
                ORDER BY 
                    CASE WHEN deadline IS NULL THEN 1 ELSE 0 END, 
                    deadline ASC, 
@@ -51,7 +52,7 @@ app.get('/api/notes', validateHeader, (req, res) => {
 });
 
 app.get('/api/notes/:id', validateHeader, (req, res) => {
-    var sql = 'SELECT * FROM notes WHERE id = ?';
+    var sql = 'SELECT * FROM notes WHERE id = ? AND IsDeleted = 0';
     var params = [req.params.id];
     db.get(sql, params, (err, row) => {
         if (err) {
@@ -148,9 +149,9 @@ app.patch('/api/notes/:id', validateHeader, (req, res) => {
 
 app.delete('/api/notes/:id', validateHeader, (req, res) => {
     db.run(
-        'DELETE FROM notes WHERE id = ?',
+        'UPDATE notes SET IsDeleted = 1 WHERE id = ?',
         req.params.id,
-        function(err, result) {
+        function(err) {
             if (err){
                 res.status(400).json({"error": err.message});
                 return;

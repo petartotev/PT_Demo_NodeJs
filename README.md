@@ -15,6 +15,7 @@ PT_Demo_NodeJs is a simple Node.js Web API using `express` and `sqlite` librarie
     - [Secret as Env Var or in Secrets.json](#secret-as-env-var-or-in-secretsjson)
 - [Backend Refactoring](#backend-refactoring)
 - [Frontend Implementation](#frontend-implementation)
+    - [Change Default Port 3000](#change-default-port-3000)
 - [Links](#links)
 
 ## Prerequisites
@@ -467,6 +468,7 @@ const ACCESS_SECRET = process.env.ACCESS_SECRET || require('./secrets.json').ACC
     - health
     - hobby
     - house
+    - shop
     - travel
     - work
 - Status
@@ -484,6 +486,24 @@ const ACCESS_SECRET = process.env.ACCESS_SECRET || require('./secrets.json').ACC
 
 ## Frontend Implementation
 
+### Change default port 3000
+
+Read [this article](https://stackoverflow.com/questions/40714583/how-to-specify-a-port-to-run-a-create-react-app-based-project).<br>
+In `package.json`, add `PORT=3456` in `scripts/start`:
+
+```
+{
+  ...
+  "scripts": {
+    "start": "PORT=3456 react-scripts start",
+    ...
+  },
+  ...
+}
+
+```
+
 ## Links
 - https://www.youtube.com/watch?v=Zo70w5ds0-w - Les Jackson's 3 Frameworks YouTube video
 - https://tecadmin.net/how-to-install-nvm-on-ubuntu-20-04/
+- https://stackoverflow.com/questions/40714583/how-to-specify-a-port-to-run-a-create-react-app-based-project
