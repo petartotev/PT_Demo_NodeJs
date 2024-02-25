@@ -378,6 +378,8 @@ app.post('/api/notes', validateHeader, (req, res) => { ... });
 
 ### Secret as Env Var or in Secrets.js
 
+⚠️ Having secrets in secrets.js is not a best practice. For now these can be set as environment variables within a session.
+
 1. Create a new `secrets.js` file and ignore it in `.gitignore`:
 ```
 ##### PT ADDED #####
@@ -428,6 +430,8 @@ function validateHeader(req, res, next) {
 
 ### Secret as Env Var or in Secrets.json
 
+⚠️ Having secrets in secrets.json is not a best practice. For now these can be set as environment variables within a session.
+
 1. Do everything described in the section above.
 
 2. Create new `secrets.json` file and add it to `.gitignore`:
@@ -477,12 +481,16 @@ const ACCESS_SECRET = process.env.ACCESS_SECRET || require('./secrets.json').ACC
     - ON_HOLD
     - NOT_DOING
     - DONE
-    - ARCHIVED
 - Deadline
 - CreatedAt
 - UpdatedAt
+- IsArchived
+- IsDeleted
 
-3. PATCH endpoint was changed in order to update `Status`.
+3. DELETE endpoint was changed in order to logically delete entities by flagging them with `isDeleted` property instead of the previous physical deletion.
+
+4. PATCH endpoint was changed in order to update `Status` only (/api/notes/status/:id).
+5. PATCH endpoint was duplicated and the new one updates `isArchived` only (/api/notes/archive/:id).
 
 ## Frontend Implementation
 
@@ -501,6 +509,12 @@ In `package.json`, add `PORT=3456` in `scripts/start`:
   ...
 }
 
+```
+
+## Known Issues
+On Windows, the following command doesn't have any effect when executed through VSC:
+```
+echo REACT_APP_TEST=123
 ```
 
 ## Links

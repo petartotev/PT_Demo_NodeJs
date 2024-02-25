@@ -10,10 +10,11 @@ let db = new sqlite3.Database('note.db', (err) => {
         id INTEGER PRIMARY KEY AUTOINCREMENT,
         content TEXT,
         type TEXT CHECK(type IN ('unknown', 'beer', 'bills', 'delivery', 'family', 'health', 'hobby', 'house', 'shop', 'travel', 'work')) NOT NULL,
-        status TEXT CHECK(status IN ('todo', 'doing', 'on_hold', 'not_doing', 'done', 'archived')) NOT NULL DEFAULT 'TODO''',
+        status TEXT CHECK(status IN ('todo', 'doing', 'on_hold', 'not_doing', 'done')) NOT NULL DEFAULT 'TODO',
         deadline DATETIME,
         createdAt DATETIME DEFAULT CURRENT_TIMESTAMP,
         updatedAt DATETIME,
+        isArchived BOOLEAN DEFAULT 0,
         isDeleted BOOLEAN DEFAULT 0
     )`, (err) => {
         if (err) {

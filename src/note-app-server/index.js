@@ -2,14 +2,13 @@ const express = require('express');
 const cors = require('cors');
 const db = require('./database');
 const bodyParser = require('body-parser');
-// const ACCESS_SECRET = process.env.ACCESS_SECRET || require('./secrets').ACCESS_SECRET;
-const ACCESS_SECRET = process.env.ACCESS_SECRET || require('./secrets.json').ACCESS_SECRET;
+const ACCESS_SECRET = process.env.ACCESS_SECRET/*|| require('./secrets.json').ACCESS_SECRET*/;
 
 const app = express();
 app.use(cors());
 
 const NoteType = ['unknown', 'beer', 'bills', 'delivery', 'family', 'health', 'hobby', 'house', 'shop', 'travel', 'work'];
-const NoteStatus = ['todo', 'doing', 'on_hold', 'not_doing', 'done', 'archived'];
+const NoteStatus = ['todo', 'doing', 'on_hold', 'not_doing', 'done'];
 
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
@@ -29,8 +28,6 @@ function validateNoteTypeAndStatus(type, status) {
 }
 
 app.get('/api/notes', validateHeader, (req, res) => {
-    // Updated SQL query to order by deadline (NULLs last), then by createdAt DESC
-    //         WHERE status != 'archived' 
     var sql = `SELECT * FROM notes
                WHERE IsDeleted = 0
                ORDER BY 
@@ -56,8 +53,10 @@ app.get('/api/notes/:id', validateHeader, (req, res) => {
     var params = [req.params.id];
     db.get(sql, params, (err, row) => {
         if (err) {
-            res.status(400).json({ "error": err.message });
-            return;
+            return res.status(400).json({ "error": err.message });
+        }
+        else if (row === undefined) {
+            return res.status(404).json({ 'error': 'Note not found' });
         }
         res.status(200).json(row);
     });
@@ -124,11 +123,11 @@ app.put('/api/notes/:id', validateHeader, (req, res) => {
     });
 });
 
-app.patch('/api/notes/:id', validateHeader, (req, res) => {
+app.patch('/api/notes/status/:id', validateHeader, (req, res) => {
     const { status } = req.body;
 
     if (!NoteStatus.includes(status)) {
-        return res.status(400).json({ "error": "Invalid status value" });
+        return res.status(400).json({ "error": `Invalid status! Must be ${NoteStatus.join(', ')}.` });
     }
 
     const sql = `UPDATE notes SET status = ?, updatedAt = CURRENT_TIMESTAMP WHERE id = ?`;
@@ -139,11 +138,32 @@ app.patch('/api/notes/:id', validateHeader, (req, res) => {
             res.status(400).json({"error": err.message});
             return;
         }
-        if (this.changes === 0) {
-            res.status(404).json({ "error": "Note not found" });
-        } else {
-            res.status(200).json({ message: "Note status updated successfully" });
+
+        this.changes === 0
+        ? res.status(404).json({ "error": "Note not found" })
+        : res.status(200).json({ message: "Note status updated successfully" });
+    });
+});
+
+app.patch('/api/notes/archive/:id', validateHeader, (req, res) => {
+    const { isArchived } = req.body;
+
+    if (isArchived !== 0 && isArchived !== 1) {
+        return res.status(400).json({ "error": "Invalid isArchive! Must be either 0 or 1." });
+    }
+
+    const sql = `UPDATE notes SET isArchived = ?, updatedAt = CURRENT_TIMESTAMP WHERE id = ?`;
+    const params = [isArchived, req.params.id];
+
+    db.run(sql, params, function(err) {
+        if (err) {
+            res.status(400).json({"error": err.message});
+            return;
         }
+
+        this.changes === 0
+        ? res.status(404).json({ "error": "Note not found" })
+        : res.status(200).json({ message: "Note isArchived updated successfully" });
     });
 });
 
