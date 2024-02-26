@@ -11,11 +11,13 @@ PT_Demo_NodeJs is a simple Node.js Web API using `express` and `sqlite` librarie
 - [Implementation using SQLite, Nodemon and Body-Parser](#implementation-using-sqlite-nodemon-and-body-parser)
 - [Access Header](#access-header)
     - [Hardcoded Secret](#hardcoded-secret)
-    - [Secret as Env Var or in Secrets.js](#secret-as-env-var-or-in-secretsjs)
-    - [Secret as Env Var or in Secrets.json](#secret-as-env-var-or-in-secretsjson)
+    - [Secret as Env Var or in Secrets.js (bad)](#secret-as-env-var-or-in-secretsjs)
+    - [Secret as Env Var or in Secrets.json (bad)](#secret-as-env-var-or-in-secretsjson)
+    - [Secret as Env Var only (better)](#secret-as-environment-variable-on-linux-or-windows)
 - [Backend Refactoring](#backend-refactoring)
 - [Frontend Implementation](#frontend-implementation)
     - [Change Default Port 3000](#change-default-port-3000)
+- [Known Issues](#known-issues)
 - [Links](#links)
 
 ## Prerequisites
@@ -378,9 +380,9 @@ app.post('/api/notes', validateHeader, (req, res) => { ... });
 
 ### Secret as Env Var or in Secrets.js
 
-⚠️ Having secrets in secrets.js is not a best practice. For now these can be set as environment variables within a session.
+⚠️ Keeping secrets in secrets.js is not a best practice! For now these can be set as environment variables within a session.
 
-1. Create a new `secrets.js` file and ignore it in `.gitignore`:
+1. Create new `secrets.js` file and ignore it in `.gitignore`:
 ```
 ##### PT ADDED #####
 secrets.js
@@ -456,6 +458,22 @@ const ACCESS_SECRET = process.env.ACCESS_SECRET || require('./secrets.json').ACC
 
 5. Test
 
+### Secret as Environment Variable on Linux or Windows
+
+💡 This is secure when it comes to development phase.
+
+On Linux, set the `ACCESS_SECRET` as an environment variable in `Terminal`:
+```
+export ACCESS_SECRET=my-header-value-123
+echo $ACCESS_SECRET
+```
+
+On Windows, set the `ACCESS_SECRET` as Environment Variable in `Console`:
+```
+set ACCESS_SECRET=123
+echo %ACCESS_SECRET%
+```
+
 ## Backend Refactoring
 
 1. All existing logic was moved to a new `note-app-server` directory.
@@ -512,12 +530,86 @@ In `package.json`, add `PORT=3456` in `scripts/start`:
 ```
 
 ## Known Issues
-On Windows, the following command doesn't have any effect when executed through VSC:
+
+### Echo Env Var does not take effect in VSC
+
+⚠️ ISSUE: On Windows, the following command doesn't have any effect when executed through VSC:
+
 ```
 echo REACT_APP_TEST=123
 ```
+
+✅ SOLUTION: Open cmd.exe, set the env var there and start the application from the same session.
+
+### Env Var used by React
+
+⚠️ ISSUE: Environment Variables cannot be read by React
+
+✅ SOLUTION: Add the following prefix in the names of the Environment Variables used by React:
+
+```
+REACT_APP_XXX_XXXXX
+```
+
+### WebSocket connection failed
+
+⚠️ ISSUE: In the Console of the browser, this error appears periodically:
+
+```
+WebSocketClient.js:13 WebSocket connection to 'ws://XX.XX.XXX.XXX:XXXX/ws' failed
+```
+
+![issue_2](./res/issue_2.png)
+
+✅ SOLUTION: Create new `.env` file on the root directory of the frontend app (where `package.json` is) and add the following line:
+
+```
+WDS_SOCKET_PORT=0
+```
+
+You can read more about it in [the following article](https://stackoverflow.com/questions/70585472/websocketclient-js16-websocket-connection-to-ws-localhost3000-ws-failed-r).
+
+### Form submission canceled
+
+⚠️ ISSUE: In the Console of the browser, this error appears when the `cancel button` is pressed:
+```
+Form submission canceled because the form is not connected
+```
+
+![issue_3](./res/issue_3.png)
+
+✅ SOLUTION: Add `type="button"` in the `cancel button`:
+
+before:
+```
+<form onSubmit={handleSubmit}>
+    ...
+    <div className="row mt-3">
+        <div className="col-12">
+            <button onClick={cancelCreate} className="btn btn-sm rounded-pill">&nbsp;<FontAwesomeIcon icon="fa-backward-step" size="3x" />&nbsp;</button>
+            <button type="submit" className="btn btn-sm rounded-pill">&nbsp;<FontAwesomeIcon icon="fa-floppy-disk" size="3x" />&nbsp;</button>
+        </div>
+    </div>
+</form>
+```
+
+after:
+```
+<form onSubmit={handleSubmit}>
+    ...
+    <div className="row mt-3">
+        <div className="col-12">
+            <button type="button" onClick={cancelCreate} className="btn btn-sm rounded-pill">&nbsp;<FontAwesomeIcon icon="fa-backward-step" size="3x" />&nbsp;</button>
+            <button type="submit" className="btn btn-sm rounded-pill">&nbsp;<FontAwesomeIcon icon="fa-floppy-disk" size="3x" />&nbsp;</button>
+        </div>
+    </div>
+</form>
+```
+
+You can read more about it in [the following article](https://stackoverflow.com/questions/52834504/react-form-submission-canceled-because-the-form-is-not-connected).
 
 ## Links
 - https://www.youtube.com/watch?v=Zo70w5ds0-w - Les Jackson's 3 Frameworks YouTube video
 - https://tecadmin.net/how-to-install-nvm-on-ubuntu-20-04/
 - https://stackoverflow.com/questions/40714583/how-to-specify-a-port-to-run-a-create-react-app-based-project
+- https://stackoverflow.com/questions/70585472/websocketclient-js16-websocket-connection-to-ws-localhost3000-ws-failed-r

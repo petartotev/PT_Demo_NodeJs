@@ -7,31 +7,23 @@
 	},
 	"item": [
 		{
-			"name": "GET All Notes",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "{{url-http-demo-nodejs}}/api/notes",
-					"host": [
-						"{{url-http-demo-nodejs}}"
-					],
-					"path": [
-						"api",
-						"notes"
-					]
-				}
-			},
-			"response": [
+			"name": "v3",
+			"item": [
 				{
-					"name": "200 OK 0",
-					"originalRequest": {
+					"name": "GET All Notes",
+					"request": {
 						"method": "GET",
-						"header": [],
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{x-auth-token}}",
+								"type": "text"
+							}
+						],
 						"url": {
-							"raw": "{{url-nodejswebapiwithles}}/api/notes",
+							"raw": "{{url-http-demo-nodejs}}/api/notes",
 							"host": [
-								"{{url-nodejswebapiwithles}}"
+								"{{url-http-demo-nodejs}}"
 							],
 							"path": [
 								"api",
@@ -39,438 +31,299 @@
 							]
 						}
 					},
-					"status": "OK",
-					"code": 200,
-					"_postman_previewlanguage": "json",
-					"header": [
+					"response": [
 						{
-							"key": "X-Powered-By",
-							"value": "Express"
+							"name": "200 OK Empty",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "X-Auth-Token",
+										"value": "{{x-auth-token}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{url-http-demo-nodejs}}/api/notes",
+									"host": [
+										"{{url-http-demo-nodejs}}"
+									],
+									"path": [
+										"api",
+										"notes"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "31"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"1f-fAOfFlptCUNm6zXj0tQd2Qn1HGI\""
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 24 Feb 2024 19:51:03 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"success\",\n    \"data\": []\n}"
 						},
 						{
-							"key": "Content-Type",
-							"value": "application/json; charset=utf-8"
-						},
-						{
-							"key": "Content-Length",
-							"value": "2"
-						},
-						{
-							"key": "ETag",
-							"value": "W/\"2-l9Fw4VUO7kr8CvBlt4zaMCqXZ0w\""
-						},
-						{
-							"key": "Date",
-							"value": "Wed, 14 Feb 2024 05:42:29 GMT"
-						},
-						{
-							"key": "Connection",
-							"value": "keep-alive"
-						},
-						{
-							"key": "Keep-Alive",
-							"value": "timeout=5"
+							"name": "200 OK",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "X-Auth-Token",
+										"value": "{{x-auth-token}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{url-http-demo-nodejs}}/api/notes",
+									"host": [
+										"{{url-http-demo-nodejs}}"
+									],
+									"path": [
+										"api",
+										"notes"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "558"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"22e-5PvRwYbIH6MxthGr1p4ZeNW9rug\""
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 24 Feb 2024 19:48:25 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"success\",\n    \"data\": [\n        {\n            \"id\": 1,\n            \"content\": \"Participate!\",\n            \"type\": \"hobby\",\n            \"status\": \"doing\",\n            \"deadline\": \"2024-03-03 09:00:00\",\n            \"createdAt\": \"2024-02-24 19:45:19\",\n            \"updatedAt\": \"2024-02-24 19:46:55\",\n            \"isArchived\": 1,\n            \"isDeleted\": 0\n        },\n        {\n            \"id\": 3,\n            \"content\": \"Go fishing!\",\n            \"type\": \"hobby\",\n            \"status\": \"todo\",\n            \"deadline\": null,\n            \"createdAt\": \"2024-02-24 19:48:01\",\n            \"updatedAt\": null,\n            \"isArchived\": 0,\n            \"isDeleted\": 0\n        },\n        {\n            \"id\": 2,\n            \"content\": \"Buy sh*t you don't need!\",\n            \"type\": \"shop\",\n            \"status\": \"todo\",\n            \"deadline\": null,\n            \"createdAt\": \"2024-02-24 19:47:47\",\n            \"updatedAt\": null,\n            \"isArchived\": 0,\n            \"isDeleted\": 0\n        }\n    ]\n}"
 						}
-					],
-					"cookie": [],
-					"body": "[]"
+					]
 				},
 				{
-					"name": "200 OK 1",
-					"originalRequest": {
+					"name": "GET Note By Id",
+					"request": {
 						"method": "GET",
-						"header": [],
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{x-auth-token}}",
+								"type": "text"
+							}
+						],
 						"url": {
-							"raw": "{{url-nodejswebapiwithles}}/api/notes",
+							"raw": "{{url-http-demo-nodejs}}/api/notes/123",
 							"host": [
-								"{{url-nodejswebapiwithles}}"
-							],
-							"path": [
-								"api",
-								"notes"
-							]
-						}
-					},
-					"status": "OK",
-					"code": 200,
-					"_postman_previewlanguage": "json",
-					"header": [
-						{
-							"key": "X-Powered-By",
-							"value": "Express"
-						},
-						{
-							"key": "Content-Type",
-							"value": "application/json; charset=utf-8"
-						},
-						{
-							"key": "Content-Length",
-							"value": "65"
-						},
-						{
-							"key": "ETag",
-							"value": "W/\"41-xU6cW615h3ATLqdjiWY4+kLPJTY\""
-						},
-						{
-							"key": "Date",
-							"value": "Wed, 14 Feb 2024 05:43:18 GMT"
-						},
-						{
-							"key": "Connection",
-							"value": "keep-alive"
-						},
-						{
-							"key": "Keep-Alive",
-							"value": "timeout=5"
-						}
-					],
-					"cookie": [],
-					"body": "[\n    {\n        \"id\": 1,\n        \"content\": \"Brush your teeth\",\n        \"createdAt\": 1707889374388\n    }\n]"
-				},
-				{
-					"name": "200 OK 2",
-					"originalRequest": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "{{url-nodejswebapiwithles}}/api/notes",
-							"host": [
-								"{{url-nodejswebapiwithles}}"
-							],
-							"path": [
-								"api",
-								"notes"
-							]
-						}
-					},
-					"status": "OK",
-					"code": 200,
-					"_postman_previewlanguage": "json",
-					"header": [
-						{
-							"key": "X-Powered-By",
-							"value": "Express"
-						},
-						{
-							"key": "Content-Type",
-							"value": "application/json; charset=utf-8"
-						},
-						{
-							"key": "Content-Length",
-							"value": "125"
-						},
-						{
-							"key": "ETag",
-							"value": "W/\"7d-ylW0Ps7/O7qHbzuiKlv+lEeqkCs\""
-						},
-						{
-							"key": "Date",
-							"value": "Wed, 14 Feb 2024 05:44:10 GMT"
-						},
-						{
-							"key": "Connection",
-							"value": "keep-alive"
-						},
-						{
-							"key": "Keep-Alive",
-							"value": "timeout=5"
-						}
-					],
-					"cookie": [],
-					"body": "[\n    {\n        \"id\": 1,\n        \"content\": \"Brush your teeth\",\n        \"createdAt\": 1707889374388\n    },\n    {\n        \"id\": 2,\n        \"content\": \"Wash the car\",\n        \"createdAt\": 1707889436019\n    }\n]"
-				}
-			]
-		},
-		{
-			"name": "GET Note By Id",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "{{url-http-demo-nodejs}}/api/notes/5",
-					"host": [
-						"{{url-http-demo-nodejs}}"
-					],
-					"path": [
-						"api",
-						"notes",
-						"5"
-					]
-				}
-			},
-			"response": [
-				{
-					"name": "200 OK",
-					"originalRequest": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "{{url-nodejswebapiwithles}}/api/notes/4",
-							"host": [
-								"{{url-nodejswebapiwithles}}"
+								"{{url-http-demo-nodejs}}"
 							],
 							"path": [
 								"api",
 								"notes",
-								"4"
+								"123"
 							]
 						}
 					},
-					"status": "OK",
-					"code": 200,
-					"_postman_previewlanguage": "json",
-					"header": [
+					"response": [
 						{
-							"key": "X-Powered-By",
-							"value": "Express"
-						},
-						{
-							"key": "Content-Type",
-							"value": "application/json; charset=utf-8"
-						},
-						{
-							"key": "Content-Length",
-							"value": "58"
-						},
-						{
-							"key": "ETag",
-							"value": "W/\"3a-FGAct5MJClRz1Ud33ldle3IUWO4\""
-						},
-						{
-							"key": "Date",
-							"value": "Thu, 15 Feb 2024 05:06:30 GMT"
-						},
-						{
-							"key": "Connection",
-							"value": "keep-alive"
-						},
-						{
-							"key": "Keep-Alive",
-							"value": "timeout=5"
-						}
-					],
-					"cookie": [],
-					"body": "{\n    \"id\": 4,\n    \"content\": \"Sing a song\",\n    \"createdAt\": 1707973563844\n}"
-				},
-				{
-					"name": "200 OK Empty",
-					"originalRequest": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "{{url-nodejswebapiwithles}}/api/notes/4",
-							"host": [
-								"{{url-nodejswebapiwithles}}"
+							"name": "200 OK",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "X-Auth-Token",
+										"value": "{{x-auth-token}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{url-http-demo-nodejs}}/api/notes/1",
+									"host": [
+										"{{url-http-demo-nodejs}}"
+									],
+									"path": [
+										"api",
+										"notes",
+										"1"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "178"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"b2-MJ91WOngzcBYI8+2LLNwf/I/iK0\""
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 24 Feb 2024 19:45:36 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
 							],
-							"path": [
-								"api",
-								"notes",
-								"4"
-							]
+							"cookie": [],
+							"body": "{\n    \"id\": 1,\n    \"content\": \"Anticipate!\",\n    \"type\": \"unknown\",\n    \"status\": \"todo\",\n    \"deadline\": \"2024-03-01 09:00:00\",\n    \"createdAt\": \"2024-02-24 19:45:19\",\n    \"updatedAt\": null,\n    \"isArchived\": 0,\n    \"isDeleted\": 0\n}"
+						},
+						{
+							"name": "404 Not Found",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "X-Auth-Token",
+										"value": "{{x-auth-token}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{url-http-demo-nodejs}}/api/notes/123",
+									"host": [
+										"{{url-http-demo-nodejs}}"
+									],
+									"path": [
+										"api",
+										"notes",
+										"123"
+									]
+								}
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "26"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"1a-BUgGXblavowehTiscymo67SSQug\""
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 24 Feb 2024 19:50:36 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"error\": \"Note not found\"\n}"
 						}
-					},
-					"status": "OK",
-					"code": 200,
-					"_postman_previewlanguage": "json",
-					"header": [
-						{
-							"key": "X-Powered-By",
-							"value": "Express"
-						},
-						{
-							"key": "Content-Type",
-							"value": "application/json; charset=utf-8"
-						},
-						{
-							"key": "Date",
-							"value": "Thu, 15 Feb 2024 05:08:25 GMT"
-						},
-						{
-							"key": "Connection",
-							"value": "keep-alive"
-						},
-						{
-							"key": "Keep-Alive",
-							"value": "timeout=5"
-						},
-						{
-							"key": "Content-Length",
-							"value": "0"
-						}
-					],
-					"cookie": [],
-					"body": null
-				}
-			]
-		},
-		{
-			"name": "POST Note",
-			"request": {
-				"method": "POST",
-				"header": [
-					{
-						"key": "X-Auth-Token",
-						"value": "ThisIsASuperSecretToken123",
-						"type": "text"
-					}
-				],
-				"body": {
-					"mode": "raw",
-					"raw": "{\r\n    \"content\": \"Prepare a delicious dish...\"\r\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "{{url-http-demo-nodejs}}/api/notes",
-					"host": [
-						"{{url-http-demo-nodejs}}"
-					],
-					"path": [
-						"api",
-						"notes"
 					]
-				}
-			},
-			"response": [
-				{
-					"name": "201 Created 1",
-					"originalRequest": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"content\": \"Brush your teeth\"\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "{{url-nodejswebapiwithles}}/api/notes",
-							"host": [
-								"{{url-nodejswebapiwithles}}"
-							],
-							"path": [
-								"api",
-								"notes"
-							]
-						}
-					},
-					"status": "Created",
-					"code": 201,
-					"_postman_previewlanguage": "json",
-					"header": [
-						{
-							"key": "X-Powered-By",
-							"value": "Express"
-						},
-						{
-							"key": "Content-Type",
-							"value": "application/json; charset=utf-8"
-						},
-						{
-							"key": "Content-Length",
-							"value": "37"
-						},
-						{
-							"key": "ETag",
-							"value": "W/\"25-hpt8fAad5VsofW89IZmYUd5i5ow\""
-						},
-						{
-							"key": "Date",
-							"value": "Wed, 14 Feb 2024 05:42:54 GMT"
-						},
-						{
-							"key": "Connection",
-							"value": "keep-alive"
-						},
-						{
-							"key": "Keep-Alive",
-							"value": "timeout=5"
-						}
-					],
-					"cookie": [],
-					"body": "{\n    \"id\": 1,\n    \"content\": \"Brush your teeth\"\n}"
 				},
 				{
-					"name": "201 Created 2",
-					"originalRequest": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"content\": \"Wash the car\"\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "{{url-nodejswebapiwithles}}/api/notes",
-							"host": [
-								"{{url-nodejswebapiwithles}}"
-							],
-							"path": [
-								"api",
-								"notes"
-							]
-						}
-					},
-					"status": "Created",
-					"code": 201,
-					"_postman_previewlanguage": "json",
-					"header": [
-						{
-							"key": "X-Powered-By",
-							"value": "Express"
-						},
-						{
-							"key": "Content-Type",
-							"value": "application/json; charset=utf-8"
-						},
-						{
-							"key": "Content-Length",
-							"value": "33"
-						},
-						{
-							"key": "ETag",
-							"value": "W/\"21-UKIy0G5Ty5mTi9lG2AW146CvG9s\""
-						},
-						{
-							"key": "Date",
-							"value": "Wed, 14 Feb 2024 05:43:56 GMT"
-						},
-						{
-							"key": "Connection",
-							"value": "keep-alive"
-						},
-						{
-							"key": "Keep-Alive",
-							"value": "timeout=5"
-						}
-					],
-					"cookie": [],
-					"body": "{\n    \"id\": 2,\n    \"content\": \"Wash the car\"\n}"
-				},
-				{
-					"name": "210 Created Header",
-					"originalRequest": {
+					"name": "POST Note",
+					"request": {
 						"method": "POST",
 						"header": [
 							{
-								"key": "X-Access-Secret",
-								"value": "abc123",
+								"key": "X-Auth-Token",
+								"value": "{{x-auth-token}}",
 								"type": "text"
 							}
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"content\": \"Prepare a delicious dish...\"\r\n}",
+							"raw": "{\r\n    \"content\": \"Anticipate!\",\r\n    \"type\": \"unknown\",\r\n    \"status\": \"todo\",\r\n    \"deadline\": \"2024-03-01 09:00:00\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -488,220 +341,94 @@
 							]
 						}
 					},
-					"status": "Created",
-					"code": 201,
-					"_postman_previewlanguage": "json",
-					"header": [
+					"response": [
 						{
-							"key": "X-Powered-By",
-							"value": "Express"
-						},
-						{
-							"key": "Content-Type",
-							"value": "application/json; charset=utf-8"
-						},
-						{
-							"key": "Content-Length",
-							"value": "49"
-						},
-						{
-							"key": "ETag",
-							"value": "W/\"31-ffEa0TAwVhD+Lze83zVYaME28Mc\""
-						},
-						{
-							"key": "Date",
-							"value": "Sat, 17 Feb 2024 05:49:22 GMT"
-						},
-						{
-							"key": "Connection",
-							"value": "keep-alive"
-						},
-						{
-							"key": "Keep-Alive",
-							"value": "timeout=5"
-						}
-					],
-					"cookie": [],
-					"body": "{\n    \"id\": 10,\n    \"content\": \"Prepare a delicious dish...\"\n}"
-				},
-				{
-					"name": "403 Forbidden Header",
-					"originalRequest": {
-						"method": "POST",
-						"header": [
-							{
-								"key": "X-Access-Secret",
-								"value": "ThisIsASuperSecretSecret1234",
-								"type": "text"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"content\": \"Prepare a delicious dish...\"\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
+							"name": "201 Created",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "X-Auth-Token",
+										"value": "{{x-auth-token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"content\": \"Anticipate!\",\r\n    \"type\": \"unknown\",\r\n    \"status\": \"todo\",\r\n    \"deadline\": \"2024-03-01 09:00:00\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url-http-demo-nodejs}}/api/notes",
+									"host": [
+										"{{url-http-demo-nodejs}}"
+									],
+									"path": [
+										"api",
+										"notes"
+									]
 								}
-							}
-						},
-						"url": {
-							"raw": "{{url-http-demo-nodejs}}/api/notes",
-							"host": [
-								"{{url-http-demo-nodejs}}"
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "98"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"62-nYqppmxf5tPqa4MEA72JLv6TzuU\""
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 24 Feb 2024 19:45:19 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
 							],
-							"path": [
-								"api",
-								"notes"
-							]
+							"cookie": [],
+							"body": "{\n    \"id\": 1,\n    \"content\": \"Anticipate!\",\n    \"type\": \"unknown\",\n    \"status\": \"todo\",\n    \"deadline\": \"2024-03-01 09:00:00\"\n}"
 						}
-					},
-					"status": "Forbidden",
-					"code": 403,
-					"_postman_previewlanguage": "json",
-					"header": [
-						{
-							"key": "X-Powered-By",
-							"value": "Express"
-						},
-						{
-							"key": "Content-Type",
-							"value": "application/json; charset=utf-8"
-						},
-						{
-							"key": "Content-Length",
-							"value": "23"
-						},
-						{
-							"key": "ETag",
-							"value": "W/\"17-M3wGB1h5YTZbiaG96/ml2UQNzM8\""
-						},
-						{
-							"key": "Date",
-							"value": "Sat, 17 Feb 2024 05:45:23 GMT"
-						},
-						{
-							"key": "Connection",
-							"value": "keep-alive"
-						},
-						{
-							"key": "Keep-Alive",
-							"value": "timeout=5"
-						}
-					],
-					"cookie": [],
-					"body": "{\n    \"error\": \"Not Allowed\"\n}"
-				}
-			]
-		},
-		{
-			"name": "PUT Note",
-			"request": {
-				"method": "PUT",
-				"header": [
-					{
-						"key": "X-Auth-Token",
-						"value": "ThisIsASuperSecretToken123",
-						"type": "text"
-					}
-				],
-				"body": {
-					"mode": "raw",
-					"raw": "{\r\n    \"content\": \"Prepare a delicious dish!!!\"\r\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "{{url-http-demo-nodejs}}/api/notes/12",
-					"host": [
-						"{{url-http-demo-nodejs}}"
-					],
-					"path": [
-						"api",
-						"notes",
-						"12"
 					]
-				}
-			},
-			"response": [
-				{
-					"name": "200 OK Updated",
-					"originalRequest": {
-						"method": "PUT",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"content\": \"Sing a very beautiful song!\"\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "{{url-nodejswebapiwithles}}/api/notes/5",
-							"host": [
-								"{{url-nodejswebapiwithles}}"
-							],
-							"path": [
-								"api",
-								"notes",
-								"5"
-							]
-						}
-					},
-					"status": "OK",
-					"code": 200,
-					"_postman_previewlanguage": "json",
-					"header": [
-						{
-							"key": "X-Powered-By",
-							"value": "Express"
-						},
-						{
-							"key": "Content-Type",
-							"value": "application/json; charset=utf-8"
-						},
-						{
-							"key": "Content-Length",
-							"value": "88"
-						},
-						{
-							"key": "ETag",
-							"value": "W/\"58-L6HH3AV4R9rEqvsJXjXoIXHYzz0\""
-						},
-						{
-							"key": "Date",
-							"value": "Thu, 15 Feb 2024 05:13:42 GMT"
-						},
-						{
-							"key": "Connection",
-							"value": "keep-alive"
-						},
-						{
-							"key": "Keep-Alive",
-							"value": "timeout=5"
-						}
-					],
-					"cookie": [],
-					"body": "{\n    \"message\": \"Note updated successfully\",\n    \"id\": \"5\",\n    \"content\": \"Sing a very beautiful song!\"\n}"
 				},
 				{
-					"name": "200 OK Header",
-					"originalRequest": {
+					"name": "PUT Note",
+					"request": {
 						"method": "PUT",
 						"header": [
 							{
 								"key": "X-Auth-Token",
-								"value": "ThisIsASuperSecretToken123",
+								"value": "{{x-auth-token}}",
 								"type": "text"
 							}
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"content\": \"Prepare a delicious dish!!!\"\r\n}",
+							"raw": "{\r\n    \"id\": 1,\r\n    \"content\": \"Participate!\",\r\n    \"type\": \"hobby\",\r\n    \"status\": \"todo\",\r\n    \"deadline\": \"2024-03-03 09:00:00\",\r\n    \"createdAt\": \"2024-02-24 19:45:19\",\r\n    \"updatedAt\": null,\r\n    \"isArchived\": 0,\r\n    \"isDeleted\": 0\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -709,288 +436,106 @@
 							}
 						},
 						"url": {
-							"raw": "{{url-http-demo-nodejs}}/api/notes/12",
+							"raw": "{{url-http-demo-nodejs}}/api/notes/1",
 							"host": [
 								"{{url-http-demo-nodejs}}"
 							],
 							"path": [
 								"api",
 								"notes",
-								"12"
+								"1"
 							]
 						}
 					},
-					"status": "OK",
-					"code": 200,
-					"_postman_previewlanguage": "json",
-					"header": [
+					"response": [
 						{
-							"key": "X-Powered-By",
-							"value": "Express"
-						},
-						{
-							"key": "Content-Type",
-							"value": "application/json; charset=utf-8"
-						},
-						{
-							"key": "Content-Length",
-							"value": "89"
-						},
-						{
-							"key": "ETag",
-							"value": "W/\"59-Z/OjCpMlcqkda1EUwMF/hspjKnI\""
-						},
-						{
-							"key": "Date",
-							"value": "Sat, 17 Feb 2024 05:52:51 GMT"
-						},
-						{
-							"key": "Connection",
-							"value": "keep-alive"
-						},
-						{
-							"key": "Keep-Alive",
-							"value": "timeout=5"
-						}
-					],
-					"cookie": [],
-					"body": "{\n    \"message\": \"Note updated successfully\",\n    \"id\": \"12\",\n    \"content\": \"Prepare a delicious dish!!!\"\n}"
-				},
-				{
-					"name": "404 Not Found",
-					"originalRequest": {
-						"method": "PUT",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"content\": \"Sing a very beautiful song!\"\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
+							"name": "200 OK",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "X-Auth-Token",
+										"value": "{{x-auth-token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"id\": 1,\r\n    \"content\": \"Participate!\",\r\n    \"type\": \"hobby\",\r\n    \"status\": \"todo\",\r\n    \"deadline\": \"2024-03-03 09:00:00\",\r\n    \"createdAt\": \"2024-02-24 19:45:19\",\r\n    \"updatedAt\": null,\r\n    \"isArchived\": 0,\r\n    \"isDeleted\": 0\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url-http-demo-nodejs}}/api/notes/1",
+									"host": [
+										"{{url-http-demo-nodejs}}"
+									],
+									"path": [
+										"api",
+										"notes",
+										"1"
+									]
 								}
-							}
-						},
-						"url": {
-							"raw": "{{url-nodejswebapiwithles}}/api/notes/55",
-							"host": [
-								"{{url-nodejswebapiwithles}}"
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "137"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"89-8f87NllniitmjAlEoFp1Pg5Ztvw\""
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 24 Feb 2024 19:46:16 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
 							],
-							"path": [
-								"api",
-								"notes",
-								"55"
-							]
+							"cookie": [],
+							"body": "{\n    \"message\": \"Note updated successfully\",\n    \"id\": \"1\",\n    \"content\": \"Participate!\",\n    \"type\": \"hobby\",\n    \"status\": \"todo\",\n    \"deadline\": \"2024-03-03 09:00:00\"\n}"
 						}
-					},
-					"status": "Not Found",
-					"code": 404,
-					"_postman_previewlanguage": "json",
-					"header": [
-						{
-							"key": "X-Powered-By",
-							"value": "Express"
-						},
-						{
-							"key": "Content-Type",
-							"value": "application/json; charset=utf-8"
-						},
-						{
-							"key": "Content-Length",
-							"value": "26"
-						},
-						{
-							"key": "ETag",
-							"value": "W/\"1a-BUgGXblavowehTiscymo67SSQug\""
-						},
-						{
-							"key": "Date",
-							"value": "Thu, 15 Feb 2024 05:14:06 GMT"
-						},
-						{
-							"key": "Connection",
-							"value": "keep-alive"
-						},
-						{
-							"key": "Keep-Alive",
-							"value": "timeout=5"
-						}
-					],
-					"cookie": [],
-					"body": "{\n    \"error\": \"Note not found\"\n}"
-				}
-			]
-		},
-		{
-			"name": "PATCH Note",
-			"request": {
-				"method": "PATCH",
-				"header": [
-					{
-						"key": "X-Auth-Token",
-						"value": "ThisIsASuperSecretToken123",
-						"type": "text"
-					}
-				],
-				"body": {
-					"mode": "raw",
-					"raw": "{\r\n    \"content\": \"Prepare a delicious dish!!!!!!\"\r\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "{{url-http-demo-nodejs}}/api/notes/12",
-					"host": [
-						"{{url-http-demo-nodejs}}"
-					],
-					"path": [
-						"api",
-						"notes",
-						"12"
 					]
-				}
-			},
-			"response": [
-				{
-					"name": "200 OK",
-					"originalRequest": {
-						"method": "PATCH",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"content\": \"Sing a BEAUTIFUL song!\"\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "{{url-nodejswebapiwithles}}/api/notes/5",
-							"host": [
-								"{{url-nodejswebapiwithles}}"
-							],
-							"path": [
-								"api",
-								"notes",
-								"5"
-							]
-						}
-					},
-					"status": "OK",
-					"code": 200,
-					"_postman_previewlanguage": "json",
-					"header": [
-						{
-							"key": "X-Powered-By",
-							"value": "Express"
-						},
-						{
-							"key": "Content-Type",
-							"value": "application/json; charset=utf-8"
-						},
-						{
-							"key": "Content-Length",
-							"value": "103"
-						},
-						{
-							"key": "ETag",
-							"value": "W/\"67-nFy76Gyr/usjqOCuVi4vJzXpbCI\""
-						},
-						{
-							"key": "Date",
-							"value": "Thu, 15 Feb 2024 05:11:14 GMT"
-						},
-						{
-							"key": "Connection",
-							"value": "keep-alive"
-						},
-						{
-							"key": "Keep-Alive",
-							"value": "timeout=5"
-						}
-					],
-					"cookie": [],
-					"body": "{\n    \"message\": \"success\",\n    \"data\": {\n        \"content\": \"Sing a BEAUTIFUL song!\",\n        \"createdAt\": 1707973874895\n    },\n    \"changes\": 1\n}"
 				},
 				{
-					"name": "200 No such entity",
-					"originalRequest": {
-						"method": "PATCH",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"content\": \"Sing a BEAUTIFUL song!\"\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "{{url-nodejswebapiwithles}}/api/notes/4",
-							"host": [
-								"{{url-nodejswebapiwithles}}"
-							],
-							"path": [
-								"api",
-								"notes",
-								"4"
-							]
-						}
-					},
-					"status": "OK",
-					"code": 200,
-					"_postman_previewlanguage": "json",
-					"header": [
-						{
-							"key": "X-Powered-By",
-							"value": "Express"
-						},
-						{
-							"key": "Content-Type",
-							"value": "application/json; charset=utf-8"
-						},
-						{
-							"key": "Content-Length",
-							"value": "103"
-						},
-						{
-							"key": "ETag",
-							"value": "W/\"67-JI5IkePvks1cCm6/IeK0nYmzm98\""
-						},
-						{
-							"key": "Date",
-							"value": "Thu, 15 Feb 2024 05:10:45 GMT"
-						},
-						{
-							"key": "Connection",
-							"value": "keep-alive"
-						},
-						{
-							"key": "Keep-Alive",
-							"value": "timeout=5"
-						}
-					],
-					"cookie": [],
-					"body": "{\n    \"message\": \"success\",\n    \"data\": {\n        \"content\": \"Sing a BEAUTIFUL song!\",\n        \"createdAt\": 1707973845263\n    },\n    \"changes\": 0\n}"
-				},
-				{
-					"name": "200 OK Header",
-					"originalRequest": {
+					"name": "PATCH Note Status",
+					"request": {
 						"method": "PATCH",
 						"header": [
 							{
 								"key": "X-Auth-Token",
-								"value": "ThisIsASuperSecretToken123",
+								"value": "{{x-auth-token}}",
 								"type": "text"
 							}
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"content\": \"Prepare a delicious dish!!!!!!\"\r\n}",
+							"raw": "{\r\n    \"status\": \"done\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -998,243 +543,719 @@
 							}
 						},
 						"url": {
-							"raw": "{{url-http-demo-nodejs}}/api/notes/12",
+							"raw": "{{url-http-demo-nodejs}}/api/notes/status/1",
 							"host": [
 								"{{url-http-demo-nodejs}}"
 							],
 							"path": [
 								"api",
 								"notes",
-								"12"
+								"status",
+								"1"
 							]
 						}
 					},
-					"status": "OK",
-					"code": 200,
-					"_postman_previewlanguage": "json",
-					"header": [
+					"response": [
 						{
-							"key": "X-Powered-By",
-							"value": "Express"
+							"name": "200 OK",
+							"originalRequest": {
+								"method": "PATCH",
+								"header": [
+									{
+										"key": "X-Auth-Token",
+										"value": "{{x-auth-token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"status\": \"doing\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url-http-demo-nodejs}}/api/notes/status/1",
+									"host": [
+										"{{url-http-demo-nodejs}}"
+									],
+									"path": [
+										"api",
+										"notes",
+										"status",
+										"1"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "46"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"2e-+dUA0ERMFiI/MrJyBDHI71ZDIEo\""
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 24 Feb 2024 19:46:31 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Note status updated successfully\"\n}"
 						},
 						{
-							"key": "Content-Type",
-							"value": "application/json; charset=utf-8"
+							"name": "400 Bad Request",
+							"originalRequest": {
+								"method": "PATCH",
+								"header": [
+									{
+										"key": "X-Auth-Token",
+										"value": "{{x-auth-token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"status\": \"dinosaur\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url-http-demo-nodejs}}/api/notes/status/2222",
+									"host": [
+										"{{url-http-demo-nodejs}}"
+									],
+									"path": [
+										"api",
+										"notes",
+										"status",
+										"2222"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "74"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"4a-gCDtEX9Av44y4DqeB5sEHAsvJFk\""
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 24 Feb 2024 19:49:36 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"error\": \"Invalid status! Must be todo, doing, on_hold, not_doing, done.\"\n}"
 						},
 						{
-							"key": "Content-Length",
-							"value": "111"
+							"name": "404 Not Found",
+							"originalRequest": {
+								"method": "PATCH",
+								"header": [
+									{
+										"key": "X-Auth-Token",
+										"value": "{{x-auth-token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"status\": \"doing\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url-http-demo-nodejs}}/api/notes/status/2",
+									"host": [
+										"{{url-http-demo-nodejs}}"
+									],
+									"path": [
+										"api",
+										"notes",
+										"status",
+										"2"
+									]
+								}
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "26"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"1a-BUgGXblavowehTiscymo67SSQug\""
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 24 Feb 2024 19:46:40 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"error\": \"Note not found\"\n}"
 						},
 						{
-							"key": "ETag",
-							"value": "W/\"6f-W//N60JEddsvdW3XcszWcqBCh94\""
-						},
-						{
-							"key": "Date",
-							"value": "Sat, 17 Feb 2024 05:53:57 GMT"
-						},
-						{
-							"key": "Connection",
-							"value": "keep-alive"
-						},
-						{
-							"key": "Keep-Alive",
-							"value": "timeout=5"
+							"name": "404 Not Found",
+							"originalRequest": {
+								"method": "PATCH",
+								"header": [
+									{
+										"key": "X-Auth-Token",
+										"value": "{{x-auth-token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"status\": \"doing\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url-http-demo-nodejs}}/api/notes/status/2222",
+									"host": [
+										"{{url-http-demo-nodejs}}"
+									],
+									"path": [
+										"api",
+										"notes",
+										"status",
+										"2222"
+									]
+								}
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "26"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"1a-BUgGXblavowehTiscymo67SSQug\""
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 24 Feb 2024 19:49:14 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"error\": \"Note not found\"\n}"
 						}
-					],
-					"cookie": [],
-					"body": "{\n    \"message\": \"success\",\n    \"data\": {\n        \"content\": \"Prepare a delicious dish!!!!!!\",\n        \"createdAt\": 1708149237422\n    },\n    \"changes\": 1\n}"
-				}
-			]
-		},
-		{
-			"name": "DELETE Note",
-			"request": {
-				"method": "DELETE",
-				"header": [
-					{
-						"key": "X-Auth-Token",
-						"value": "ThisIsASuperSecretToken123",
-						"type": "text"
-					}
-				],
-				"url": {
-					"raw": "{{url-http-demo-nodejs}}/api/notes/4",
-					"host": [
-						"{{url-http-demo-nodejs}}"
-					],
-					"path": [
-						"api",
-						"notes",
-						"4"
 					]
-				}
-			},
-			"response": [
+				},
 				{
-					"name": "200 OK",
-					"originalRequest": {
-						"method": "DELETE",
-						"header": [],
+					"name": "PATCH Note Archive",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{x-auth-token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"isArchived\": 0\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
 						"url": {
-							"raw": "{{url-nodejswebapiwithles}}/api/notes/4",
+							"raw": "{{url-http-demo-nodejs}}/api/notes/archive/1",
 							"host": [
-								"{{url-nodejswebapiwithles}}"
+								"{{url-http-demo-nodejs}}"
 							],
 							"path": [
 								"api",
 								"notes",
-								"4"
+								"archive",
+								"1"
 							]
 						}
 					},
-					"status": "OK",
-					"code": 200,
-					"_postman_previewlanguage": "json",
-					"header": [
+					"response": [
 						{
-							"key": "X-Powered-By",
-							"value": "Express"
-						},
-						{
-							"key": "Content-Type",
-							"value": "application/json; charset=utf-8"
-						},
-						{
-							"key": "Content-Length",
-							"value": "33"
-						},
-						{
-							"key": "ETag",
-							"value": "W/\"21-k2zl4Fq8LUUyFctrrIZoB6jlNZ4\""
-						},
-						{
-							"key": "Date",
-							"value": "Thu, 15 Feb 2024 05:08:15 GMT"
-						},
-						{
-							"key": "Connection",
-							"value": "keep-alive"
-						},
-						{
-							"key": "Keep-Alive",
-							"value": "timeout=5"
-						}
-					],
-					"cookie": [],
-					"body": "{\n    \"message\": \"deleted\",\n    \"changes\": 1\n}"
-				},
-				{
-					"name": "200 OK No such entity",
-					"originalRequest": {
-						"method": "DELETE",
-						"header": [],
-						"url": {
-							"raw": "{{url-nodejswebapiwithles}}/api/notes/5",
-							"host": [
-								"{{url-nodejswebapiwithles}}"
+							"name": "200 OK",
+							"originalRequest": {
+								"method": "PATCH",
+								"header": [
+									{
+										"key": "X-Auth-Token",
+										"value": "{{x-auth-token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"isArchived\": 1\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url-http-demo-nodejs}}/api/notes/archive/1",
+									"host": [
+										"{{url-http-demo-nodejs}}"
+									],
+									"path": [
+										"api",
+										"notes",
+										"archive",
+										"1"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "50"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"32-HuAXkUwDlofshhN8eP/mFUh3Fwk\""
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 24 Feb 2024 19:46:55 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
 							],
-							"path": [
-								"api",
-								"notes",
-								"5"
-							]
+							"cookie": [],
+							"body": "{\n    \"message\": \"Note isArchived updated successfully\"\n}"
+						},
+						{
+							"name": "400 Bad Request",
+							"originalRequest": {
+								"method": "PATCH",
+								"header": [
+									{
+										"key": "X-Auth-Token",
+										"value": "{{x-auth-token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"isArchived\": 123\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url-http-demo-nodejs}}/api/notes/archive/1111",
+									"host": [
+										"{{url-http-demo-nodejs}}"
+									],
+									"path": [
+										"api",
+										"notes",
+										"archive",
+										"1111"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "53"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"35-J4jYMJV7On5URReHgCINOR/MQMA\""
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 24 Feb 2024 19:49:56 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"error\": \"Invalid isArchive! Must be either 0 or 1.\"\n}"
+						},
+						{
+							"name": "404 Not Found",
+							"originalRequest": {
+								"method": "PATCH",
+								"header": [
+									{
+										"key": "X-Auth-Token",
+										"value": "{{x-auth-token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"isArchived\": 1\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url-http-demo-nodejs}}/api/notes/archive/1111",
+									"host": [
+										"{{url-http-demo-nodejs}}"
+									],
+									"path": [
+										"api",
+										"notes",
+										"archive",
+										"1111"
+									]
+								}
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "26"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"1a-BUgGXblavowehTiscymo67SSQug\""
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 24 Feb 2024 19:49:03 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"error\": \"Note not found\"\n}"
 						}
-					},
-					"status": "OK",
-					"code": 200,
-					"_postman_previewlanguage": "json",
-					"header": [
-						{
-							"key": "X-Powered-By",
-							"value": "Express"
-						},
-						{
-							"key": "Content-Type",
-							"value": "application/json; charset=utf-8"
-						},
-						{
-							"key": "Content-Length",
-							"value": "33"
-						},
-						{
-							"key": "ETag",
-							"value": "W/\"21-7d/JJPxav2fcBwpFhbnTPVMcdSk\""
-						},
-						{
-							"key": "Date",
-							"value": "Thu, 15 Feb 2024 05:07:55 GMT"
-						},
-						{
-							"key": "Connection",
-							"value": "keep-alive"
-						},
-						{
-							"key": "Keep-Alive",
-							"value": "timeout=5"
-						}
-					],
-					"cookie": [],
-					"body": "{\n    \"message\": \"deleted\",\n    \"changes\": 0\n}"
+					]
 				},
 				{
-					"name": "200 OK Header",
-					"originalRequest": {
+					"name": "Delete Note",
+					"request": {
 						"method": "DELETE",
 						"header": [
 							{
 								"key": "X-Auth-Token",
-								"value": "ThisIsASuperSecretToken123",
+								"value": "{{x-auth-token}}",
 								"type": "text"
 							}
 						],
 						"url": {
-							"raw": "{{url-http-demo-nodejs}}/api/notes/12",
+							"raw": "{{url-http-demo-nodejs}}/api/notes/2",
 							"host": [
 								"{{url-http-demo-nodejs}}"
 							],
 							"path": [
 								"api",
 								"notes",
-								"12"
+								"2"
 							]
 						}
 					},
-					"status": "OK",
-					"code": 200,
-					"_postman_previewlanguage": "json",
-					"header": [
+					"response": [
 						{
-							"key": "X-Powered-By",
-							"value": "Express"
+							"name": "200 OK",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "X-Auth-Token",
+										"value": "{{x-auth-token}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{url-http-demo-nodejs}}/api/notes/3",
+									"host": [
+										"{{url-http-demo-nodejs}}"
+									],
+									"path": [
+										"api",
+										"notes",
+										"3"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "33"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"21-k2zl4Fq8LUUyFctrrIZoB6jlNZ4\""
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 24 Feb 2024 19:48:41 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"deleted\",\n    \"changes\": 1\n}"
 						},
 						{
-							"key": "Content-Type",
-							"value": "application/json; charset=utf-8"
-						},
-						{
-							"key": "Content-Length",
-							"value": "33"
-						},
-						{
-							"key": "ETag",
-							"value": "W/\"21-k2zl4Fq8LUUyFctrrIZoB6jlNZ4\""
-						},
-						{
-							"key": "Date",
-							"value": "Sat, 17 Feb 2024 05:54:47 GMT"
-						},
-						{
-							"key": "Connection",
-							"value": "keep-alive"
-						},
-						{
-							"key": "Keep-Alive",
-							"value": "timeout=5"
+							"name": "200 OK",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "X-Auth-Token",
+										"value": "{{x-auth-token}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{url-http-demo-nodejs}}/api/notes/33",
+									"host": [
+										"{{url-http-demo-nodejs}}"
+									],
+									"path": [
+										"api",
+										"notes",
+										"33"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "33"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"21-7d/JJPxav2fcBwpFhbnTPVMcdSk\""
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 24 Feb 2024 19:48:52 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"deleted\",\n    \"changes\": 0\n}"
 						}
-					],
-					"cookie": [],
-					"body": "{\n    \"message\": \"deleted\",\n    \"changes\": 1\n}"
+					]
 				}
 			]
 		}
@@ -1263,6 +1284,11 @@
 		{
 			"key": "url-http-demo-nodejs",
 			"value": "http://localhost:4000",
+			"type": "string"
+		},
+		{
+			"key": "x-auth-token",
+			"value": "",
 			"type": "string"
 		}
 	]
