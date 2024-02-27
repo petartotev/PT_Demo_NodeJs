@@ -2,6 +2,8 @@ const express = require('express');
 const cors = require('cors');
 const db = require('./database');
 const bodyParser = require('body-parser');
+const { createLogger, transports, format } = require('winston');
+
 const ACCESS_SECRET = process.env.ACCESS_SECRET/*|| require('./secrets.json').ACCESS_SECRET*/;
 
 const app = express();
@@ -12,6 +14,52 @@ const NoteStatus = ['todo', 'doing', 'on_hold', 'not_doing', 'done'];
 
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
+
+const logger = createLogger({
+    level: 'info',
+    format: format.combine(
+        format.timestamp({ format: 'YYYY-MM-DD HH:mm:ss' }),
+        format.json()
+    ),
+    transports: [
+        new transports.File({
+            filename: 'combined.log',
+            format: format.combine(
+                format.json(),
+                format((info) => {
+                    const { timestamp, ...rest } = info;
+                    return { timestamp, ...rest, message: JSON.stringify(rest) };
+                })()
+            )
+        })
+    ]
+});
+
+app.use((req, res, next) => {
+    const logData = {
+        timestamp: new Date().toUTCString(),
+        method: req.method,
+        url: req.originalUrl,
+        ip: req.ip,
+        request: {
+            body: req.body
+        },
+        response: {
+            status: null,
+            body: null
+        }
+    };
+
+    const originalSend = res.send;
+    res.send = function (body) {
+        logData.response.status = res.statusCode;
+        logData.response.body = res.statusCode !== 200 && res.statusCode !== 201 ? body : 'successful operation';
+        logger.info(logData);
+        originalSend.call(this, body);
+    };
+
+    next();
+});
 
 function validateHeader(req, res, next) {
     const myHeaderValue = req.headers['x-auth-token'];
