@@ -4,7 +4,8 @@ const db = require('./database');
 const bodyParser = require('body-parser');
 const { createLogger, transports, format } = require('winston');
 
-const ACCESS_SECRET = process.env.ACCESS_SECRET/*|| require('./secrets.json').ACCESS_SECRET*/;
+const ACCESS_TOKEN = process.env.ACCESS_TOKEN/* || require('./secrets.json').ACCESS_TOKEN*/;
+const SHARED_SECRET = process.env.SHARED_SECRET;
 
 const app = express();
 app.use(cors());
@@ -37,7 +38,7 @@ const logger = createLogger({
 
 app.use((req, res, next) => {
     const logData = {
-        timestamp: new Date().toUTCString(),
+        eventTime: new Date().toUTCString(),
         method: req.method,
         url: req.originalUrl,
         ip: req.ip,
@@ -63,8 +64,16 @@ app.use((req, res, next) => {
 
 function validateHeader(req, res, next) {
     const myHeaderValue = req.headers['x-auth-token'];
-    if (myHeaderValue !== ACCESS_SECRET) {
+    if (myHeaderValue !== ACCESS_TOKEN) {
         return res.status(403).json({ "error": "Not Allowed" });
+    }
+    next();
+}
+
+function validateSharedSecret(req, res, next) {
+    const sharedSecretHeader = req.headers['x-shared-secret'];
+    if (sharedSecretHeader !== SHARED_SECRET) {
+        return res.status(403).json({ "error": "Invalid Shared Secret" });
     }
     next();
 }
@@ -75,7 +84,7 @@ function validateNoteTypeAndStatus(type, status) {
     return isValidType && isValidStatus;
 }
 
-app.get('/api/notes', validateHeader, (req, res) => {
+app.get('/api/notes', validateHeader, validateSharedSecret, (req, res) => {
     var sql = `SELECT * FROM notes
                WHERE IsDeleted = 0
                ORDER BY 
@@ -96,7 +105,7 @@ app.get('/api/notes', validateHeader, (req, res) => {
     });
 });
 
-app.get('/api/notes/:id', validateHeader, (req, res) => {
+app.get('/api/notes/:id', validateHeader, validateSharedSecret, (req, res) => {
     var sql = 'SELECT * FROM notes WHERE id = ? AND IsDeleted = 0';
     var params = [req.params.id];
     db.get(sql, params, (err, row) => {
@@ -110,7 +119,7 @@ app.get('/api/notes/:id', validateHeader, (req, res) => {
     });
 });
 
-app.post('/api/notes', validateHeader, (req, res) => {
+app.post('/api/notes', validateHeader, validateSharedSecret, (req, res) => {
     const { content, type, status, deadline } = req.body;
     const errors = [];
 
@@ -142,7 +151,7 @@ app.post('/api/notes', validateHeader, (req, res) => {
     });
 });
 
-app.put('/api/notes/:id', validateHeader, (req, res) => {
+app.put('/api/notes/:id', validateHeader, validateSharedSecret, (req, res) => {
     const { content, type, status, deadline } = req.body;
     if (!content || !type || !status || !validateNoteTypeAndStatus(type, status)) {
         return res.status(400).json({ 'error': 'Invalid input values' });
@@ -171,7 +180,7 @@ app.put('/api/notes/:id', validateHeader, (req, res) => {
     });
 });
 
-app.patch('/api/notes/status/:id', validateHeader, (req, res) => {
+app.patch('/api/notes/status/:id', validateHeader, validateSharedSecret, (req, res) => {
     const { status } = req.body;
 
     if (!NoteStatus.includes(status)) {
@@ -193,7 +202,7 @@ app.patch('/api/notes/status/:id', validateHeader, (req, res) => {
     });
 });
 
-app.patch('/api/notes/archive/:id', validateHeader, (req, res) => {
+app.patch('/api/notes/archive/:id', validateHeader, validateSharedSecret, (req, res) => {
     const { isArchived } = req.body;
 
     if (isArchived !== 0 && isArchived !== 1) {
@@ -215,7 +224,7 @@ app.patch('/api/notes/archive/:id', validateHeader, (req, res) => {
     });
 });
 
-app.delete('/api/notes/:id', validateHeader, (req, res) => {
+app.delete('/api/notes/:id', validateHeader, validateSharedSecret, (req, res) => {
     db.run(
         'UPDATE notes SET IsDeleted = 1 WHERE id = ?',
         req.params.id,
