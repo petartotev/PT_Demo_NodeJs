@@ -353,3 +353,4 @@ MigrationBackup/
 secrets.js
 secrets.json
 combined.log
+note.db
