@@ -70,6 +70,9 @@ function formatDate(date) {
 
 export const updateNoteById = async (id, noteData, token) => {
     try {
+      noteData.deadline = noteData.deadline === null || noteData.deadline === ''
+        ? noteData.deadline
+        : formatDate(noteData.deadline);
       const response = await axios.put(`${API_URL}/${id}`, noteData, {
         headers: {
           'X-Auth-Token': token,

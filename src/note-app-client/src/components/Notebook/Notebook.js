@@ -1,6 +1,6 @@
 import './Notebook.css';
 import React, { useEffect, useState } from 'react';
-import { getAllNotes, updateNoteStatusById, updateNoteArchiveById, deleteNoteById, postNote } from '../../clients/note-app-server.js';
+import { getAllNotes, updateNoteStatusById, updateNoteArchiveById, deleteNoteById, postNote, updateNoteById } from '../../clients/note-app-server.js';
 import NoteBox from '../NoteBox/NoteBox.js';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import NoteCreateForm from '../NoteCreateForm/NoteCreateForm.js';
@@ -33,6 +33,16 @@ function Notebook(token) {
             setNotes(updatedNotes.data); // Update the notes state with the updated list
         } catch (error) {
             console.error('Error archiving note:', error);
+        }
+    }
+
+    async function updateNote(noteToUpdate) {
+        try {
+            await updateNoteById(noteToUpdate.id, noteToUpdate, token.authToken);
+            const updatedNotes = await getAllNotes(token.authToken);
+            setNotes(updatedNotes.data); // Update the notes state with the updated list
+        } catch (error) {
+            console.error('Error updating note:', error);
         }
     }
 
@@ -90,7 +100,7 @@ function Notebook(token) {
                 <div key={status}>
                     <hr />
                     <h2 className="display-3">{status}</h2>
-                    {sectionNotes.map(note => (<NoteBox key={note.id} note={note} updateMyStatus={updateNoteStatus} updateMyArchive={updateNoteArchive} />))}
+                    {sectionNotes.map(note => (<NoteBox key={note.id} note={note} updateMyStatus={updateNoteStatus} updateMyArchive={updateNoteArchive} onUpdate={updateNote}/>))}
                 </div>
             ))}
             <div key="ARCHIVED">

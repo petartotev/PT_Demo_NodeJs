@@ -12,7 +12,7 @@ function NoteCreateForm({ onCreate, cancelCreate }) {
         e.preventDefault();
         onCreate(note);
     };
-
+	
     function isFormContentEmpty() {
         console.log("Note is " + note.content + ".");
         return note.content === null || note.content === undefined || note.content === '' || note.content === ' ';
@@ -62,7 +62,6 @@ function NoteCreateForm({ onCreate, cancelCreate }) {
                                 <option value="on_hold">On Hold</option>
                                 <option value="not_doing">Not Doing</option>
                                 <option value="done">Done</option>
-                                <option value="archived">Archived</option>
                             </select>                          
                         </div>
                     </div>
