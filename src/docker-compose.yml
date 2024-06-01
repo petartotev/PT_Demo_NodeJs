@@ -1,0 +1,22 @@
+version: '3.8'
+services:
+  note-app-client:
+    build:
+      context: ./note-app-client
+      args:
+        REACT_APP_API_URL: http://my-public-ip:4045/api/notes
+        REACT_APP_ACCESS_TOKEN: token123
+        REACT_APP_SHARED_SECRET: secret123
+    ports:
+      - "3045:3045"
+    depends_on:
+      - note-app-server
+
+  note-app-server:
+    build:
+      context: ./note-app-server
+    ports:
+      - "4045:4045"
+    environment:
+      - ACCESS_TOKEN=token123
+      - SHARED_SECRET=secret123
